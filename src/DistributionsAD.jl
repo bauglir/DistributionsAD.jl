@@ -2,9 +2,12 @@ module DistributionsAD
 
 using PDMats,
       LinearAlgebra,
+      DiffRules,
       Distributions,
+      NaNMath,
       Random,
       SpecialFunctions,
+      StaticArrays,
       StatsFuns,
       Compat,
       Requires,
@@ -14,19 +17,19 @@ using PDMats,
       FillArrays,
       Adapt
 
-using SpecialFunctions: logabsgamma, digamma
-using LinearAlgebra: copytri!, AbstractTriangular
-using Distributions: AbstractMvLogNormal,
+using .SpecialFunctions: logabsgamma, digamma
+using .LinearAlgebra: copytri!, AbstractTriangular
+using .Distributions: AbstractMvLogNormal,
                      ContinuousMultivariateDistribution
 using Base.Iterators: drop
 
 import StatsBase
-import StatsFuns: logsumexp,
+import .StatsFuns: logsumexp,
                   binomlogpdf,
                   nbinomlogpdf,
                   poislogpdf,
                   nbetalogpdf
-import Distributions: MvNormal,
+import .Distributions: MvNormal,
                       MvLogNormal,
                       logpdf,
                       quantile,
@@ -71,9 +74,8 @@ include("zygote.jl")
     end
 
     @require Tracker="9f7883ad-71c0-57eb-9f7f-b5c9e6d3789c" begin
-        using DiffRules
-        using SpecialFunctions
-        using LinearAlgebra: AbstractTriangular
+        using .DiffRules
+        using .SpecialFunctions
         using .Tracker: Tracker, TrackedReal, TrackedVector, TrackedMatrix,
                         TrackedArray, TrackedVecOrMat, track, @grad, data
         include("tracker.jl")

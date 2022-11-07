@@ -2,11 +2,11 @@ module ReverseDiffX
 
 export NotTracked
 
-using LinearAlgebra
+using ..LinearAlgebra
 using ..ReverseDiff
-using StaticArrays
-using Distributions
-using PDMats
+using ..StaticArrays
+using ..Distributions
+using ..PDMats
 using ..ForwardDiff
 
 using Base.Broadcast: BroadcastStyle, ArrayStyle, Broadcasted, broadcasted
@@ -17,18 +17,19 @@ using ..ReverseDiff: SpecialInstruction, value, value!, deriv, track, record!,
 using ..DistributionsAD: DistributionsAD
 
 
-import SpecialFunctions, NaNMath
+import ..SpecialFunctions
+import ..NaNMath
 import ..DistributionsAD: turing_chol, symm_turing_chol, adapt_randn,
     simplex_logpdf
 import Base.Broadcast: materialize
-import StatsFuns: logsumexp
+import ..StatsFuns: logsumexp
 
 const TrackedVecOrMat{V,D} = Union{TrackedVector{V,D},TrackedMatrix{V,D}}
 const RDBroadcasted{F, T} = Broadcasted{<:Any, <:Any, F, T}
 
-import Random
+import ..Random
 
-import Distributions: logpdf,
+import ..Distributions: logpdf,
                       _logpdf,
                       loglikelihood,
                       Gamma,
